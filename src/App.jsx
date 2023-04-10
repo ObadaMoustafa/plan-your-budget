@@ -1,4 +1,4 @@
-import { Typography, Container, Button } from "@mui/material";
+import { Typography, Container, Button, Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import {
@@ -38,9 +38,11 @@ function App() {
         </Typography>
       </Link>
       {isUser ? (
-        <Button variant="contained" onClick={handleSignOut}>
-          sign out
-        </Button>
+        <Box>
+          <Button variant="contained" onClick={handleSignOut}>
+            sign out
+          </Button>
+        </Box>
       ) : (
         <Link to="/login">
           <Typography variant="h3" component="h1">
