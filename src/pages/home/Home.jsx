@@ -10,8 +10,8 @@ function Home() {
     <>
       {isUser ? (
         <>
-          <AddExpenses />
           <AddYourIncome />
+          <AddExpenses />
           <RestAmount />
         </>
       ) : (
