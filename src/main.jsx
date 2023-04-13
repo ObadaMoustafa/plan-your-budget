@@ -10,7 +10,6 @@ import {
 import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
 import "./style.css";
-import CheckUser from "./CheckUser";
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -19,7 +18,6 @@ const routes = createBrowserRouter(
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
       </Route>
-      <Route path="/check-user" element={<CheckUser />} />
     </>
   )
 );

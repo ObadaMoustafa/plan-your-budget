@@ -1,18 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Box, Fab, TextField, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { editDataInDb, getDataFormDb } from "../../../../utils/getData";
-import { useImmerReducer } from "use-immer";
-import {
-  APP_ACTIONS,
-  APP_INITIAL_STATE,
-  appReducer,
-} from "../../../../reducers/appReducer";
+import { APP_ACTIONS } from "../../../../reducers/appReducer";
+import { AppExpensesContext } from "../../../../context/expensesContext";
 
 function AddYourIncome() {
   //write code here
   const incomeEl = useRef();
-  const [appState, dispatch] = useImmerReducer(appReducer, APP_INITIAL_STATE);
+  const { appState, dispatch } = useContext(AppExpensesContext);
   const [shouldModify, setShouldModify] = useState(false);
 
   async function editIncome() {

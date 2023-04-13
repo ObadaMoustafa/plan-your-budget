@@ -7,6 +7,7 @@ import { Box } from "@mui/material";
 function AddExpenses() {
   //write code here
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <Box my={2}>
       <AddButton onclick={setIsOpen} />
