@@ -1,16 +1,10 @@
 import { Typography, Container, Button, Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import {
-  isSignInWithEmailLink,
-  onAuthStateChanged,
-  signInWithEmailLink,
-  signOut,
-} from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./firebaseConfige";
 
 function App() {
-  const navigate = useNavigate();
   const [isUser, setIsUser] = useState(false);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
