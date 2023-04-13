@@ -4,13 +4,12 @@ export const APP_ACTIONS = {
   SET_EXPENSES: "SET_EXPENSES",
   PUSH_AN_EXPENSE: "PUSH_AN_EXPENSE",
   GET_TOTAL_EXPENSES: "GET_TOTAL_EXPENSES",
-  GET_REST_MONEY: "GET_REST_MONEY",
   SET_REST_MONEY: "SET_REST_MONEY",
 };
 
 export const APP_INITIAL_STATE = {
   income: 0,
-  expenses: null,
+  expenses: {},
   totalExpenses: 0,
   restMoney: 0,
 };
@@ -37,6 +36,10 @@ export const appReducer = (state = APP_INITIAL_STATE, action) => {
     case APP_ACTIONS.GET_TOTAL_EXPENSES: {
       const totalExpenses = state.expenses.reduce((a, b) => a + b, 0);
       state.totalExpenses = totalExpenses;
+      break;
+    }
+    case APP_ACTIONS.SET_REST_MONEY: {
+      state.restMoney = action.payload;
       break;
     }
 

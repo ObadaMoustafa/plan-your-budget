@@ -4,19 +4,21 @@ export const ADD_EXPENSES_ACTIONS = {
 };
 
 export const addExpensesInitial = {
-  title: "lidl",
-  value: "550",
-  category: "food",
-  description: "any description",
-  IBAN: "NL 1234 ING 02154 2134",
-  ref: "factuur nummer 55621",
+  title: "",
+  value: "",
+  category: "",
+  description: "",
+  IBAN: "",
+  ref: "",
 };
 
 export const addExpensesReducer = (state = addExpensesInitial, action) => {
   switch (action.type) {
     case ADD_EXPENSES_ACTIONS.CHANGE_FIELD: {
-      const property = action.key;
-      state[property] = action.payload;
+      const value = action.payload;
+      const useableValue = isNaN(value) ? value : Number(value);
+      const key = action.key;
+      state[key] = useableValue;
       break;
     }
     case ADD_EXPENSES_ACTIONS.RESET: {

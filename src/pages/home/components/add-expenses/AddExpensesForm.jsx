@@ -31,9 +31,13 @@ function AddExpensesForm() {
     // update the app state
     // update the ex state
     const elementRef = await updateDbDate("expenses", singleExpenseState);
-    console.log("🚀 => elementRef:", elementRef);
-
-    dispatch({ type: APP_ACTIONS.PUSH_AN_EXPENSE, payload: elementRef });
+    // save the single expenses object
+    const copyOfSingleExpenseState = singleExpenseState;
+    dispatch({
+      type: APP_ACTIONS.PUSH_AN_EXPENSE,
+      key: elementRef,
+      payload: copyOfSingleExpenseState,
+    });
     dispatchSubmit({ type: ADD_EXPENSES_ACTIONS.RESET });
   }
 
