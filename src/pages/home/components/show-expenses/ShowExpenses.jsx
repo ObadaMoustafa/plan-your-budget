@@ -4,6 +4,8 @@ import { getDataFormDb } from "../../../../utils/getData";
 import { APP_ACTIONS } from "../../../../reducers/appReducer";
 import SingleExpenseCard from "./SingleExpenseCard";
 import { Grid } from "@mui/material";
+import { getDatabase, onValue, ref } from "firebase/database";
+import { auth } from "../../../../firebaseConfige";
 
 function ShowExpenses() {
   //write code here
@@ -15,7 +17,19 @@ function ShowExpenses() {
       const expenses = await getDataFormDb("expenses");
       dispatch({ type: APP_ACTIONS.SET_EXPENSES, payload: expenses || {} });
     })();
-    // set it to app state
+
+    // add proper listeners
+
+    onValue(
+      ref(getDatabase(), `users/${auth.currentUser.uid}/expenses`),
+      (snapshot) => {
+        console.log("🚀  snapshot:", snapshot.exportVal());
+        dispatch({
+          type: APP_ACTIONS.SET_EXPENSES,
+          payload: snapshot.exportVal() || {},
+        });
+      }
+    );
   }, []);
 
   return (

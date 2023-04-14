@@ -14,14 +14,12 @@ const AppExpensesContextProvider = ({ children }) => {
     // totalExpenses
     const expensesArr = Object.values(expenses);
     if (expensesArr.length) {
-      const totalExpenses = expensesArr
-        .map((obj) => obj.value)
-        .reduce((a, b) => a + b, 0);
-      console.log("🚀  totalExpenses:", totalExpenses);
+      const restMoney =
+        income - expensesArr.map((obj) => obj.value).reduce((a, b) => a + b, 0);
 
       dispatch({
         type: APP_ACTIONS.SET_REST_MONEY,
-        payload: income - totalExpenses,
+        payload: restMoney,
       });
     }
     // the rest money

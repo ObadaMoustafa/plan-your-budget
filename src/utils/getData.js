@@ -3,8 +3,8 @@ import { auth } from "../firebaseConfige";
 
 export async function getDataFormDb(path) {
   const uid = auth.currentUser.uid;
-  const dbRef = ref(getDatabase());
-  const snapshot = await get(child(dbRef, `users/${uid}/${path}`));
+  const dbRef = ref(getDatabase(), `users/${uid}`);
+  const snapshot = await get(child(dbRef, path));
   const data = snapshot.val();
   return data;
 }

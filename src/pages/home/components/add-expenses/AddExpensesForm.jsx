@@ -41,10 +41,6 @@ function AddExpensesForm() {
     dispatchSubmit({ type: ADD_EXPENSES_ACTIONS.RESET });
   }
 
-  useEffect(() => {
-    console.log("🚀 => appState:", appState);
-    console.log("🚀 => singleExpenseState:", singleExpenseState);
-  }, [appState]);
   return (
     <form style={{ width: "100%", display: "flex", justifyContent: "center" }}>
       <FormControl
