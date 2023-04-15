@@ -9,23 +9,25 @@ import { createContext, useEffect } from "react";
 export const AppExpensesContext = createContext();
 const AppExpensesContextProvider = ({ children }) => {
   const [appState, dispatch] = useImmerReducer(appReducer, APP_INITIAL_STATE);
-  const { income, expenses } = appState;
+  const { income, expenses, restMoney } = appState;
+
   useEffect(() => {
     // totalExpenses
     const expensesArr = Object.values(expenses);
+    let restMoney;
     if (expensesArr.length) {
-      const restMoney =
+      restMoney =
         income - expensesArr.map((obj) => obj.value).reduce((a, b) => a + b, 0);
-
-      dispatch({
-        type: APP_ACTIONS.SET_REST_MONEY,
-        payload: restMoney,
-      });
     }
+    dispatch({
+      type: APP_ACTIONS.SET_REST_MONEY,
+      payload: restMoney || income,
+    });
+
     // the rest money
   }, [income, expenses]);
 
-  const sharedValues = { appState, dispatch };
+  const sharedValues = { dispatch, income, expenses, restMoney };
   return (
     <AppExpensesContext.Provider value={sharedValues}>
       {children}

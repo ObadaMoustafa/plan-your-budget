@@ -1,7 +1,7 @@
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Box, Fab } from "@mui/material";
-import BackdropForm from "../../../../components/BackdropForm";
+import BackdropForm from "../../../../../components/BackdropForm";
 import EditExpenseForm from "./EditExpenseForm";
 import { useState } from "react";
 import DeleteExpenseConfirmation from "./DeleteExpenseConfirmation";
@@ -39,7 +39,7 @@ function ModifyIcons({ id }) {
       </Fab>
       {shouldEdit && (
         <BackdropForm setOpen={setShouldEdit}>
-          <EditExpenseForm />
+          <EditExpenseForm id={id} />
         </BackdropForm>
       )}
       {shouldDelete && (

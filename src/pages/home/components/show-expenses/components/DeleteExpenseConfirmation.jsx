@@ -1,5 +1,5 @@
 import { getDatabase, ref, remove } from "firebase/database";
-import { auth } from "../../../../firebaseConfige";
+import { auth } from "../../../../../firebaseConfige";
 import { Box, Button, Typography } from "@mui/material";
 
 function DeleteExpenseConfirmation({ id, setOpen }) {
@@ -10,7 +10,6 @@ function DeleteExpenseConfirmation({ id, setOpen }) {
   async function deleteExpense() {
     const { uid } = auth.currentUser;
     await remove(ref(getDatabase(), `users/${uid}/expenses/${id}`));
-    console.log(`${id} deleted`);
   }
 
   return (

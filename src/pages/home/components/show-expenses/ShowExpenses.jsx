@@ -2,28 +2,21 @@ import { useContext, useEffect } from "react";
 import { AppExpensesContext } from "../../../../context/expensesContext";
 import { getDataFormDb } from "../../../../utils/getData";
 import { APP_ACTIONS } from "../../../../reducers/appReducer";
-import SingleExpenseCard from "./SingleExpenseCard";
-import { Grid } from "@mui/material";
+import SingleExpenseCard from "./components/SingleExpenseCard";
+import { Box, Grid } from "@mui/material";
 import { getDatabase, onValue, ref } from "firebase/database";
 import { auth } from "../../../../firebaseConfige";
 
 function ShowExpenses() {
   //write code here
-  const { appState, dispatch } = useContext(AppExpensesContext);
-  const { expenses } = appState;
+  const { dispatch, expenses } = useContext(AppExpensesContext);
+
+  const expensesArr = Object.entries(expenses);
   useEffect(() => {
-    // get expenses
-    (async () => {
-      const expenses = await getDataFormDb("expenses");
-      dispatch({ type: APP_ACTIONS.SET_EXPENSES, payload: expenses || {} });
-    })();
-
     // add proper listeners
-
     onValue(
       ref(getDatabase(), `users/${auth.currentUser.uid}/expenses`),
       (snapshot) => {
-        console.log("🚀  snapshot:", snapshot.exportVal());
         dispatch({
           type: APP_ACTIONS.SET_EXPENSES,
           payload: snapshot.exportVal() || {},
@@ -33,15 +26,15 @@ function ShowExpenses() {
   }, []);
 
   return (
-    <>
-      {Object.values(expenses).length > 0 ? (
+    <Box my={5}>
+      {expensesArr.length > 0 ? (
         <Grid container spacing={2} justifyContent="center">
-          {Object.entries(expenses).map(([key, expenseObject]) => {
+          {expensesArr.map(([OBJ_ID, expenseObject]) => {
             const { title, value, description } = expenseObject;
             return (
-              <Grid item key={key}>
+              <Grid item key={OBJ_ID} xs={12} sm={6} md={4}>
                 <SingleExpenseCard
-                  id={key}
+                  id={OBJ_ID}
                   title={title}
                   value={value}
                   desc={description}
@@ -53,7 +46,7 @@ function ShowExpenses() {
       ) : (
         <h1>You need to add some expenses</h1>
       )}
-    </>
+    </Box>
   );
 }
 

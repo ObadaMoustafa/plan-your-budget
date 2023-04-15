@@ -8,7 +8,7 @@ import { AppExpensesContext } from "../../../../context/expensesContext";
 function AddYourIncome() {
   //write code here
   const incomeEl = useRef();
-  const { appState, dispatch } = useContext(AppExpensesContext);
+  const { dispatch, income } = useContext(AppExpensesContext);
   const [shouldModify, setShouldModify] = useState(false);
 
   async function editIncome() {
@@ -39,7 +39,7 @@ function AddYourIncome() {
 
   return (
     <Box>
-      <Typography variant="h3">{appState.income} €/month</Typography>
+      <Typography variant="h3">{income} €/month</Typography>
       <Fab onClick={editIncome}>
         <EditIcon />
       </Fab>

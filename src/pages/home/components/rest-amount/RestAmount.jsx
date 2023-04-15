@@ -4,8 +4,7 @@ import { useContext } from "react";
 import { AppExpensesContext } from "../../../../context/expensesContext";
 
 function RestAmount() {
-  const { appState } = useContext(AppExpensesContext);
-  const { restMoney } = appState;
+  const { restMoney } = useContext(AppExpensesContext);
 
   return (
     <Box>

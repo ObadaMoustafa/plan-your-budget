@@ -1,18 +1,35 @@
-import { Button, FormControl, TextField } from "@mui/material";
 import { useImmerReducer } from "use-immer";
 import {
   ADD_EXPENSES_ACTIONS,
   addExpensesInitial,
   addExpensesReducer,
-} from "../../../../reducers/addExpensesReducer";
-import { pushDataToDb } from "../../../../utils/setUpdateData";
+} from "../../../../../reducers/addExpensesReducer";
+import { useEffect } from "react";
+import { updateItemInDb } from "../../../../../utils/setUpdateData";
+import { Button, FormControl, TextField } from "@mui/material";
+import { getDataFormDb } from "../../../../../utils/getData";
 
-function AddExpensesForm() {
-  //write code here
+function EditExpenseForm({ id }) {
   const [singleExpenseState, dispatchSubmit] = useImmerReducer(
     addExpensesReducer,
     addExpensesInitial
   );
+
+  // get the expense objects value on render
+  useEffect(() => {
+    (async function () {
+      try {
+        const expenseObj = await getDataFormDb(`expenses/${id}`);
+
+        dispatchSubmit({
+          type: ADD_EXPENSES_ACTIONS.SET_FIELDS,
+          payload: expenseObj,
+        });
+      } catch (error) {
+        console.error(error.message);
+      }
+    })();
+  }, []);
 
   function handleChangeField(e) {
     const key = e.target.name;
@@ -23,7 +40,7 @@ function AddExpensesForm() {
   async function handleSubmitExpenses(e) {
     e.preventDefault();
     // update db
-    await pushDataToDb("expenses", singleExpenseState);
+    await updateItemInDb(id, singleExpenseState);
 
     // CLEAR FIELDS
     dispatchSubmit({ type: ADD_EXPENSES_ACTIONS.RESET });
@@ -96,11 +113,11 @@ function AddExpensesForm() {
         />
 
         <Button onClick={handleSubmitExpenses} type="submit">
-          Add expense
+          Save
         </Button>
       </FormControl>
     </form>
   );
 }
 
-export default AddExpensesForm;
+export default EditExpenseForm;
