@@ -1,9 +1,10 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Box, Fab, TextField, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import { editDataInDb, getDataFormDb } from "../../../../utils/getData";
+import { getDataFormDb } from "../../../../utils/getData";
 import { APP_ACTIONS } from "../../../../reducers/appReducer";
 import { AppExpensesContext } from "../../../../context/expensesContext";
+import { editDataInDb } from "../../../../utils/setUpdateData";
 
 function AddYourIncome() {
   //write code here
@@ -13,14 +14,13 @@ function AddYourIncome() {
 
   async function editIncome() {
     if (shouldModify) {
+      if (!incomeEl.current.value) return setShouldModify(false);
       const value = Number(incomeEl.current.value);
       try {
         await editDataInDb("income", value);
         dispatch({ type: APP_ACTIONS.GET_OR_SET_INCOME, payload: value });
         setShouldModify(false);
-      } catch (err) {
-        console.log("can't modify", err.message);
-      }
+      } catch (err) {}
     } else {
       setShouldModify(true);
     }
@@ -32,7 +32,7 @@ function AddYourIncome() {
         const income = await getDataFormDb("income");
         dispatch({ type: APP_ACTIONS.GET_OR_SET_INCOME, payload: income });
       } catch (err) {
-        console.log("can't get the initial income", err.message);
+        console.error("can't get the initial income", err.message);
       }
     })();
   }, []);

@@ -4,6 +4,7 @@ import AddYourIncome from "./components/add-your-income/AddYourIncome";
 import RestAmount from "./components/rest-amount/RestAmount";
 import ShowExpenses from "./components/show-expenses/ShowExpenses";
 import AppExpensesContextProvider from "../../context/expensesContext";
+import TotalExpenses from "./components/total-expenses/TotalExpenses";
 
 function Home() {
   //write code here
@@ -15,6 +16,7 @@ function Home() {
           <AddYourIncome />
           <AddExpenses />
           <ShowExpenses />
+          <TotalExpenses />
           <RestAmount />
         </AppExpensesContextProvider>
       ) : (

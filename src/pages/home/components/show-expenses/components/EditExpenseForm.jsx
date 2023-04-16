@@ -5,7 +5,7 @@ import {
   addExpensesReducer,
 } from "../../../../../reducers/addExpensesReducer";
 import { useEffect } from "react";
-import { updateItemInDb } from "../../../../../utils/setUpdateData";
+import { updateSingleExpenseInDb } from "../../../../../utils/setUpdateData";
 import { Button, FormControl, TextField } from "@mui/material";
 import { getDataFormDb } from "../../../../../utils/getData";
 
@@ -40,7 +40,7 @@ function EditExpenseForm({ id }) {
   async function handleSubmitExpenses(e) {
     e.preventDefault();
     // update db
-    await updateItemInDb(id, singleExpenseState);
+    await updateSingleExpenseInDb(id, singleExpenseState);
 
     // CLEAR FIELDS
     dispatchSubmit({ type: ADD_EXPENSES_ACTIONS.RESET });

@@ -11,11 +11,11 @@ export const pushDataToDb = async (path, element) => {
     await set(newPostRef, element);
     return newPostRef.key;
   } catch (error) {
-    console.log("couldn't push element", error.message);
+    console.error("couldn't push element", error.message);
   }
 };
 
-export const updateItemInDb = async (id, value) => {
+export const updateSingleExpenseInDb = async (id, value) => {
   const db = getDatabase();
   const { uid } = auth.currentUser;
 
@@ -23,6 +23,12 @@ export const updateItemInDb = async (id, value) => {
     const DBRef = ref(db, `users/${uid}/expenses/${id}`);
     await update(DBRef, value);
   } catch (error) {
-    console.log("can't update", error.message);
+    console.error("can't update", error.message);
   }
 };
+
+export async function editDataInDb(path, value) {
+  const uid = auth.currentUser.uid;
+  const db = getDatabase();
+  await set(ref(db, `users/${uid}/${path}`), value);
+}

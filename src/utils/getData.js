@@ -8,9 +8,3 @@ export async function getDataFormDb(path) {
   const data = snapshot.val();
   return data;
 }
-
-export async function editDataInDb(path, value) {
-  const uid = auth.currentUser.uid;
-  const db = getDatabase();
-  await set(ref(db, `users/${uid}/${path}`), value);
-}

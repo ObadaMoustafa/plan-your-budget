@@ -3,23 +3,24 @@ import EuroIcon from "@mui/icons-material/Euro";
 import { useContext } from "react";
 import { AppExpensesContext } from "../../../../context/expensesContext";
 
-function RestAmount() {
-  const { restMoney } = useContext(AppExpensesContext);
+function TotalExpenses() {
+  const { totalExpenses } = useContext(AppExpensesContext);
 
   return (
     <Box>
       <Button
         variant="contained"
         startIcon={<EuroIcon style={{ fontSize: "75px" }} />}
+        color="warning"
         fullWidth
       >
         <Typography variant="h1" mr={3}>
-          {restMoney}
+          {totalExpenses}
         </Typography>
-        <Typography variant="h4">is left</Typography>
+        <Typography variant="h4">Total expenses</Typography>
       </Button>
     </Box>
   );
 }
 
-export default RestAmount;
+export default TotalExpenses;

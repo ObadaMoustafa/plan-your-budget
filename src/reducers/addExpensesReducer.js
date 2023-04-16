@@ -24,7 +24,6 @@ export const addExpensesReducer = (state = addExpensesInitial, action) => {
     }
 
     case ADD_EXPENSES_ACTIONS.SET_FIELDS: {
-      console.log("set fields triggered");
       const { title, value, category, description, IBAN, ref } = action.payload;
       state.title = title;
       state.value = value;

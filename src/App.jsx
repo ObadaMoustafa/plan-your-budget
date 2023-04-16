@@ -10,10 +10,8 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
-        console.log("uid from app", uid);
         setIsUser(true);
       } else {
-        console.log("user signed out from app", user);
         setIsUser(false);
       }
     });
