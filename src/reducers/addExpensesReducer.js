@@ -10,27 +10,28 @@ export const addExpensesInitial = {
   category: "",
   description: "",
   IBAN: "",
-  ref: "",
+  refMsg: "",
 };
 
 export const addExpensesReducer = (state = addExpensesInitial, action) => {
   switch (action.type) {
     case ADD_EXPENSES_ACTIONS.CHANGE_FIELD: {
-      const value = action.payload;
-      const useableValue = isNaN(value) ? value : Number(value);
+      let value = action.payload;
       const key = action.key;
-      state[key] = useableValue;
+      if (key === "value") value = Number(value);
+      state[key] = value;
       break;
     }
 
     case ADD_EXPENSES_ACTIONS.SET_FIELDS: {
-      const { title, value, category, description, IBAN, ref } = action.payload;
+      const { title, value, category, description, IBAN, refMsg } =
+        action.payload;
       state.title = title;
       state.value = value;
       state.category = category;
       state.description = description;
       state.IBAN = IBAN;
-      state.ref = ref;
+      state.refMsg = refMsg;
       break;
     }
 
@@ -40,7 +41,7 @@ export const addExpensesReducer = (state = addExpensesInitial, action) => {
       state.category = "";
       state.description = "";
       state.IBAN = "";
-      state.ref = "";
+      state.refMsg = "";
       break;
     }
 

@@ -39,11 +39,15 @@ function EditExpenseForm({ id }) {
 
   async function handleSubmitExpenses(e) {
     e.preventDefault();
-    // update db
-    await updateSingleExpenseInDb(id, singleExpenseState);
+    try {
+      // update db
+      await updateSingleExpenseInDb(id, singleExpenseState);
 
-    // CLEAR FIELDS
-    dispatchSubmit({ type: ADD_EXPENSES_ACTIONS.RESET });
+      // CLEAR FIELDS
+      dispatchSubmit({ type: ADD_EXPENSES_ACTIONS.RESET });
+    } catch (error) {
+      console.error("can't update", error.message);
+    }
   }
 
   return (
@@ -107,8 +111,8 @@ function EditExpenseForm({ id }) {
           variant="filled"
           color="warning"
           label="Transfer msg"
-          name="ref"
-          value={singleExpenseState.ref}
+          name="refMsg"
+          value={singleExpenseState.refMsg}
           onInput={handleChangeField}
         />
 

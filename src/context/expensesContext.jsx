@@ -17,7 +17,7 @@ const AppExpensesContextProvider = ({ children }) => {
       const expensesArr = Object.values(expenses);
       const isExpenses = expensesArr.length > 0;
       let totalExpenses = 0,
-        restMoney = 0;
+        restMoney = income;
       if (isExpenses) {
         totalExpenses = expensesArr
           .map((obj) => obj.value)

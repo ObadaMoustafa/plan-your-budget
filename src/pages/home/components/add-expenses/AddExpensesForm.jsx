@@ -90,8 +90,8 @@ function AddExpensesForm() {
           variant="filled"
           color="warning"
           label="Transfer msg"
-          name="ref"
-          value={singleExpenseState.ref}
+          name="refMsg"
+          value={singleExpenseState.refMsg}
           onInput={handleChangeField}
         />
 

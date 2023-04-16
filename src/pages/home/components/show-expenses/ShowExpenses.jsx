@@ -30,7 +30,7 @@ function ShowExpenses() {
       {expensesArr.length > 0 ? (
         <Grid container spacing={2} justifyContent="center">
           {expensesArr.map(([OBJ_ID, expenseObject]) => {
-            const { title, value, description, category, IBAN, ref } =
+            const { title, value, description, category, IBAN, refMsg } =
               expenseObject;
             return (
               <Grid item key={OBJ_ID} xs={12} sm={6} md={4}>
@@ -41,7 +41,7 @@ function ShowExpenses() {
                   category={category}
                   description={description}
                   IBAN={IBAN}
-                  refMsg={ref}
+                  refMsg={refMsg}
                 />
               </Grid>
             );

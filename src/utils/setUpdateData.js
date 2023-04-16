@@ -18,13 +18,8 @@ export const pushDataToDb = async (path, element) => {
 export const updateSingleExpenseInDb = async (id, value) => {
   const db = getDatabase();
   const { uid } = auth.currentUser;
-
-  try {
-    const DBRef = ref(db, `users/${uid}/expenses/${id}`);
-    await update(DBRef, value);
-  } catch (error) {
-    console.error("can't update", error.message);
-  }
+  const DBRef = ref(db, `users/${uid}/expenses/${id}`);
+  await update(DBRef, value);
 };
 
 export async function editDataInDb(path, value) {
