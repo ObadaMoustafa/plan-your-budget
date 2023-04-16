@@ -15,11 +15,11 @@ export const pushDataToDb = async (path, element) => {
   }
 };
 
-export const updateSingleExpenseInDb = async (id, value) => {
+export const updateSingleExpenseInDb = async (expenseID, value) => {
   const db = getDatabase();
   const { uid } = auth.currentUser;
-  const DBRef = ref(db, `users/${uid}/expenses/${id}`);
-  await update(DBRef, value);
+  const DBRef = ref(db, `users/${uid}/expenses/${expenseID}`);
+  await set(DBRef, value);
 };
 
 export async function editDataInDb(path, value) {
