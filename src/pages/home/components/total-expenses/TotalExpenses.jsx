@@ -10,14 +10,17 @@ function TotalExpenses() {
     <Box>
       <Button
         variant="contained"
-        startIcon={<EuroIcon style={{ fontSize: "75px" }} />}
+        sx={{ fontSize: "100px" }}
+        startIcon={<EuroIcon style={{ fontSize: "3rem" }} />}
         color="warning"
         fullWidth
       >
-        <Typography variant="h1" mr={3}>
+        <Typography variant="h1" mr={3} fontSize={{ xs: "50px", md: "100px" }}>
           {totalExpenses}
         </Typography>
-        <Typography variant="h4">Total expenses</Typography>
+        <Typography variant="h4" fontSize={{ xs: "16px", md: "50px" }}>
+          Total expenses
+        </Typography>
       </Button>
     </Box>
   );

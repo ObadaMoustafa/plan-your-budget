@@ -7,16 +7,18 @@ function RestAmount() {
   const { restMoney } = useContext(AppExpensesContext);
 
   return (
-    <Box>
+    <Box my={1}>
       <Button
         variant="contained"
-        startIcon={<EuroIcon style={{ fontSize: "75px" }} />}
+        startIcon={<EuroIcon style={{ fontSize: "3rem" }} />}
         fullWidth
       >
-        <Typography variant="h1" mr={3}>
+        <Typography variant="h1" mr={3} fontSize={{ xs: "50px", md: "100px" }}>
           {restMoney}
         </Typography>
-        <Typography variant="h4">is left</Typography>
+        <Typography variant="h4" fontSize={{ xs: "16px", md: "50px" }}>
+          is left
+        </Typography>
       </Button>
     </Box>
   );
