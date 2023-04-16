@@ -41,6 +41,7 @@ function EditExpenseForm({ id }) {
     e.preventDefault();
     try {
       // update db
+      console.log(singleExpenseState);
       await updateSingleExpenseInDb(id, singleExpenseState);
 
       // CLEAR FIELDS

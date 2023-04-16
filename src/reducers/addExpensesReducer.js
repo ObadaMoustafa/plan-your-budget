@@ -26,12 +26,12 @@ export const addExpensesReducer = (state = addExpensesInitial, action) => {
     case ADD_EXPENSES_ACTIONS.SET_FIELDS: {
       const { title, value, category, description, IBAN, refMsg } =
         action.payload;
-      state.title = title;
-      state.value = value;
-      state.category = category;
-      state.description = description;
-      state.IBAN = IBAN;
-      state.refMsg = refMsg;
+      state.title = title || "";
+      state.value = value || "";
+      state.category = category || "";
+      state.description = description || "";
+      state.IBAN = IBAN || "";
+      state.refMsg = refMsg || "";
       break;
     }
 
