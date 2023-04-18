@@ -1,28 +1,37 @@
 import { useContext, useEffect } from "react";
-import { AppExpensesContext } from "../../../../context/expensesContext";
+import { AppContext } from "../../../../context/expensesContext";
 import { getDataFormDb } from "../../../../utils/getData";
 import { APP_ACTIONS } from "../../../../reducers/appReducer";
 import SingleExpenseCard from "./components/SingleExpenseCard";
 import { Box, Grid } from "@mui/material";
 import { getDatabase, onValue, ref } from "firebase/database";
 import { auth } from "../../../../firebaseConfige";
+import { sumValuesInObject } from "../../../../utils/helperFunctions";
+import { editDataInDb } from "../../../../utils/setUpdateData";
 
 function ShowExpenses() {
   //write code here
-  const { dispatch, expenses } = useContext(AppExpensesContext);
-
+  const { dispatch, expenses } = useContext(AppContext);
   const expensesArr = Object.entries(expenses);
+
   useEffect(() => {
     // add proper listeners
-    onValue(
-      ref(getDatabase(), `users/${auth.currentUser.uid}/expenses`),
-      (snapshot) => {
-        dispatch({
-          type: APP_ACTIONS.SET_EXPENSES,
-          payload: snapshot.exportVal() || {},
-        });
-      }
-    );
+    const { uid } = auth.currentUser;
+    onValue(ref(getDatabase(), `users/${uid}/expenses`), async (snapshot) => {
+      const expensesObj = snapshot.val() || {};
+      dispatch({
+        type: APP_ACTIONS.SET_EXPENSES,
+        payload: expensesObj,
+      });
+
+      // update total income ui
+      const newTotalExpenses = sumValuesInObject(expensesObj);
+      await editDataInDb("totalExpenses", newTotalExpenses);
+      dispatch({
+        type: APP_ACTIONS.SET_TOTAL_EXPENSES,
+        payload: newTotalExpenses,
+      });
+    });
   }, []);
 
   return (

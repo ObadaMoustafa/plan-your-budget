@@ -37,7 +37,7 @@ function App() {
         </Box>
       ) : (
         <Link to="/login">
-          <Typography variant="h3" component="h1">
+          <Typography variant="h3" component="h2">
             Login
           </Typography>
         </Link>

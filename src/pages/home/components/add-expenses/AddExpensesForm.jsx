@@ -22,11 +22,15 @@ function AddExpensesForm() {
 
   async function handleSubmitExpenses(e) {
     e.preventDefault();
-    // update db
-    await pushDataToDb("expenses", singleExpenseState);
+    try {
+      // update db
+      await pushDataToDb("expenses", singleExpenseState);
 
-    // CLEAR FIELDS
-    dispatchSubmit({ type: ADD_EXPENSES_ACTIONS.RESET });
+      // CLEAR FIELDS
+      dispatchSubmit({ type: ADD_EXPENSES_ACTIONS.RESET });
+    } catch (error) {
+      console.error("can't push single expense", error.message);
+    }
   }
 
   return (

@@ -7,52 +7,33 @@ import {
 import { createContext, useEffect } from "react";
 import { editDataInDb } from "../utils/setUpdateData";
 
-export const AppExpensesContext = createContext();
-const AppExpensesContextProvider = ({ children }) => {
+export const AppContext = createContext();
+const AppContextProvider = ({ children }) => {
   const [appState, dispatch] = useImmerReducer(appReducer, APP_INITIAL_STATE);
-  const { income, expenses, restMoney, totalExpenses } = appState;
+  const { income, expenses, totalIncome, restMoney, totalExpenses } = appState;
 
   useEffect(() => {
     (async function () {
-      const expensesArr = Object.values(expenses);
-      const isExpenses = expensesArr.length > 0;
-      let totalExpenses = 0,
-        restMoney = income;
-      if (isExpenses) {
-        totalExpenses = expensesArr
-          .map((obj) => obj.value)
-          .reduce((a, b) => a + b, 0);
-        restMoney = income - totalExpenses;
-      }
-
-      try {
-        // update db
-        await editDataInDb("totalExpenses", totalExpenses);
-        await editDataInDb("restMoney", restMoney);
-        // update UI
-        dispatch({
-          type: APP_ACTIONS.SET_REST_MONEY,
-          payload: restMoney,
-        });
-
-        dispatch({
-          type: APP_ACTIONS.SET_TOTAL_EXPENSES,
-          payload: totalExpenses,
-        });
-      } catch (error) {
-        console.error("couldn't update db", error.message);
-      }
+      const newRestMoney = totalIncome - totalExpenses;
+      await editDataInDb("restMoney", newRestMoney);
+      dispatch({ type: APP_ACTIONS.SET_REST_MONEY, payload: newRestMoney });
     })();
+  }, [totalIncome, totalExpenses]);
 
-    // the rest money
-  }, [income, expenses]);
-
-  const sharedValues = { dispatch, income, expenses, restMoney, totalExpenses };
+  useEffect(() => {
+    console.log(appState);
+  }, [appState]);
+  const sharedValues = {
+    dispatch,
+    income,
+    expenses,
+    totalIncome,
+    restMoney,
+    totalExpenses,
+  };
   return (
-    <AppExpensesContext.Provider value={sharedValues}>
-      {children}
-    </AppExpensesContext.Provider>
+    <AppContext.Provider value={sharedValues}>{children}</AppContext.Provider>
   );
 };
 
-export default AppExpensesContextProvider;
+export default AppContextProvider;

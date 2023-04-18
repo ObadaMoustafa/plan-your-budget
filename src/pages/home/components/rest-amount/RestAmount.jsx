@@ -1,10 +1,10 @@
 import { Box, Button, Typography } from "@mui/material";
 import EuroIcon from "@mui/icons-material/Euro";
 import { useContext } from "react";
-import { AppExpensesContext } from "../../../../context/expensesContext";
+import { AppContext } from "../../../../context/expensesContext";
 
 function RestAmount() {
-  const { restMoney } = useContext(AppExpensesContext);
+  const { restMoney } = useContext(AppContext);
 
   return (
     <Box my={1}>

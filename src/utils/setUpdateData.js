@@ -7,12 +7,8 @@ export const pushDataToDb = async (path, element) => {
   const { uid } = auth.currentUser;
   const postListRef = ref(db, `users/${uid}/${path}`);
   const newPostRef = push(postListRef);
-  try {
-    await set(newPostRef, element);
-    return newPostRef.key;
-  } catch (error) {
-    console.error("couldn't push element", error.message);
-  }
+  await set(newPostRef, element);
+  return newPostRef.key;
 };
 
 export const updateSingleExpenseInDb = async (expenseID, value) => {
