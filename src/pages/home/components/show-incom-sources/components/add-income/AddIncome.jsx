@@ -6,9 +6,9 @@ import AddIncomeForm from "./AddIncomForm";
 
 function AddIncome() {
   const [openBackDrop, setOpenBackDrop] = useState(false);
-  const open = () => {
-    setOpenBackDrop(true);
-  };
+  const open = () => setOpenBackDrop(true);
+  const closeBackDrop = () => setOpenBackDrop(false);
+
   return (
     <>
       <Button
@@ -22,7 +22,7 @@ function AddIncome() {
       </Button>
       {openBackDrop && (
         <BackdropForm setOpen={setOpenBackDrop}>
-          <AddIncomeForm />
+          <AddIncomeForm close={closeBackDrop} />
         </BackdropForm>
       )}
     </>

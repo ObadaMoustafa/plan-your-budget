@@ -1,29 +1,26 @@
 import { Box, Button, Typography } from "@mui/material";
 import EuroIcon from "@mui/icons-material/Euro";
-import { useContext } from "react";
-import { AppContext } from "../../../../context/expensesContext";
 
-function TotalExpenses() {
-  const { totalExpenses } = useContext(AppContext);
+function ShowAmount({ amount, text, color = "primary" }) {
+  //write code here
 
   return (
-    <Box>
+    <Box my={1}>
       <Button
         variant="contained"
-        sx={{ fontSize: "100px" }}
         startIcon={<EuroIcon style={{ fontSize: "3rem" }} />}
-        color="warning"
+        color={color}
         fullWidth
       >
         <Typography variant="h1" mr={3} fontSize={{ xs: "50px", md: "100px" }}>
-          {totalExpenses}
+          {amount}
         </Typography>
         <Typography variant="h4" fontSize={{ xs: "16px", md: "50px" }}>
-          Total expenses
+          {text}
         </Typography>
       </Button>
     </Box>
   );
 }
 
-export default TotalExpenses;
+export default ShowAmount;

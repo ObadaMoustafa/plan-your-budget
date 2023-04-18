@@ -17,6 +17,12 @@ export const updateSingleExpenseInDb = async (expenseID, value) => {
   const DBRef = ref(db, `users/${uid}/expenses/${expenseID}`);
   await set(DBRef, value);
 };
+export const updateSingleIncomeInDb = async (incomeKey, value) => {
+  const db = getDatabase();
+  const { uid } = auth.currentUser;
+  const DBRef = ref(db, `users/${uid}/income/${incomeKey}`);
+  await set(DBRef, value);
+};
 
 export async function editDataInDb(path, value) {
   const uid = auth.currentUser.uid;

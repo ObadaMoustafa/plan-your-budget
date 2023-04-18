@@ -20,9 +20,6 @@ const AppContextProvider = ({ children }) => {
     })();
   }, [totalIncome, totalExpenses]);
 
-  useEffect(() => {
-    console.log(appState);
-  }, [appState]);
   const sharedValues = {
     dispatch,
     income,

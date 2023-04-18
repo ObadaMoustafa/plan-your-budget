@@ -1,6 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
+import ActionButtons from "./ActionButtons";
 
-function IncomeCard({ title, value, id }) {
+function IncomeCard({ title, value, incomeKey }) {
   return (
     <Box
       sx={{
@@ -12,21 +13,17 @@ function IncomeCard({ title, value, id }) {
         my: 1,
       }}
     >
-      <Grid container justifyContent="space-evenly">
-        <Grid item xs={6} md={4}>
-          <Typography variant="h6" textAlign="center">
+      <Grid container justifyContent="center" columns={20}>
+        <Grid item xs={15}>
+          <Typography variant="h6" textAlign="left">
             {title}
           </Typography>
-        </Grid>
-        <Grid item xs={6} md={4}>
-          <Typography variant="h6" textAlign="center">
+          <Typography variant="h6" textAlign="left">
             €{value}
           </Typography>
         </Grid>
-        <Grid item xs={12} md={4}>
-          <Typography variant="h6" textAlign="center">
-            ♥♥♥
-          </Typography>
+        <Grid item xs={5}>
+          <ActionButtons incomeKey={incomeKey} />
         </Grid>
       </Grid>
     </Box>

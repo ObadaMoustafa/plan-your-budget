@@ -8,6 +8,7 @@ import { getDatabase, onValue, ref } from "firebase/database";
 import { auth } from "../../../../firebaseConfige";
 import { sumValuesInObject } from "../../../../utils/helperFunctions";
 import { editDataInDb } from "../../../../utils/setUpdateData";
+import AddExpenses from "./components/add-expenses/AddExpenses";
 
 function ShowExpenses() {
   //write code here
@@ -36,6 +37,7 @@ function ShowExpenses() {
 
   return (
     <Box my={5}>
+      <AddExpenses />
       {expensesArr.length > 0 ? (
         <Grid container spacing={2} justifyContent="center">
           {expensesArr.map(([OBJ_ID, expenseObject]) => {

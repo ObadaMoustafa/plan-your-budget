@@ -1,10 +1,8 @@
 import { Navigate, useOutletContext } from "react-router-dom";
-import AddExpenses from "./components/add-expenses/AddExpenses";
-import RestAmount from "./components/rest-amount/RestAmount";
 import ShowExpenses from "./components/show-expenses/ShowExpenses";
 import AppContextProvider from "../../context/expensesContext";
-import TotalExpenses from "./components/total-expenses/TotalExpenses";
 import ShowIncomeSources from "./components/show-incom-sources/ShowIncomeSources";
+import TotalAmounts from "./components/total-amounts/TotalAmounts";
 
 function Home() {
   //write code here
@@ -14,10 +12,8 @@ function Home() {
       {isUser ? (
         <AppContextProvider>
           <ShowIncomeSources />
-          <AddExpenses />
           <ShowExpenses />
-          <TotalExpenses />
-          <RestAmount />
+          <TotalAmounts />
         </AppContextProvider>
       ) : (
         <Navigate to="/login" />

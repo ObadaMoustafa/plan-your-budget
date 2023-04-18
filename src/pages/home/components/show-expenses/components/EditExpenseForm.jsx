@@ -9,7 +9,7 @@ import { updateSingleExpenseInDb } from "../../../../../utils/setUpdateData";
 import { Button, FormControl, TextField } from "@mui/material";
 import { getDataFormDb } from "../../../../../utils/getData";
 
-function EditExpenseForm({ id }) {
+function EditExpenseForm({ id, close }) {
   const [singleExpenseState, dispatchSubmit] = useImmerReducer(
     addExpensesReducer,
     addExpensesInitial
@@ -41,11 +41,11 @@ function EditExpenseForm({ id }) {
     e.preventDefault();
     try {
       // update db
-      console.log(singleExpenseState);
       await updateSingleExpenseInDb(id, singleExpenseState);
 
       // CLEAR FIELDS
       dispatchSubmit({ type: ADD_EXPENSES_ACTIONS.RESET });
+      close();
     } catch (error) {
       console.error("can't update", error.message);
     }

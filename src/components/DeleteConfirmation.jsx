@@ -1,15 +1,15 @@
-import { getDatabase, ref, remove } from "firebase/database";
-import { auth } from "../../../../../firebaseConfige";
 import { Box, Button, Typography } from "@mui/material";
+import { auth } from "../firebaseConfige";
+import { getDatabase, ref, remove } from "firebase/database";
 
-function DeleteExpenseConfirmation({ id, setOpen }) {
+function DeleteConfirmation({ id, setOpen, text, shouldDelete }) {
   function closeBackDrop() {
     setOpen(false);
   }
 
   async function deleteExpense() {
     const { uid } = auth.currentUser;
-    await remove(ref(getDatabase(), `users/${uid}/expenses/${id}`));
+    await remove(ref(getDatabase(), `users/${uid}/${shouldDelete}/${id}`));
   }
 
   return (
@@ -23,7 +23,7 @@ function DeleteExpenseConfirmation({ id, setOpen }) {
         p={2}
       >
         <Typography variant="h5" color="black">
-          Are you sure you want to delete this item ?
+          {text}
         </Typography>
         <Box margin="5px auto" width="fit-content">
           <Button variant="outlined" onClick={deleteExpense} sx={{ mr: 2 }}>
@@ -38,4 +38,4 @@ function DeleteExpenseConfirmation({ id, setOpen }) {
   );
 }
 
-export default DeleteExpenseConfirmation;
+export default DeleteConfirmation;

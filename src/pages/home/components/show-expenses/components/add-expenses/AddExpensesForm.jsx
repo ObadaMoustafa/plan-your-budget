@@ -4,10 +4,10 @@ import {
   ADD_EXPENSES_ACTIONS,
   addExpensesInitial,
   addExpensesReducer,
-} from "../../../../reducers/addExpensesReducer";
-import { pushDataToDb } from "../../../../utils/setUpdateData";
+} from "../../../../../../reducers/addExpensesReducer";
+import { pushDataToDb } from "../../../../../../utils/setUpdateData";
 
-function AddExpensesForm() {
+function AddExpensesForm({ close }) {
   //write code here
   const [singleExpenseState, dispatchSubmit] = useImmerReducer(
     addExpensesReducer,
@@ -28,6 +28,7 @@ function AddExpensesForm() {
 
       // CLEAR FIELDS
       dispatchSubmit({ type: ADD_EXPENSES_ACTIONS.RESET });
+      close();
     } catch (error) {
       console.error("can't push single expense", error.message);
     }

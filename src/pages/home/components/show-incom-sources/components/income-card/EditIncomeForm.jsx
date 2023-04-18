@@ -1,15 +1,15 @@
 import { useImmerReducer } from "use-immer";
+import { useEffect } from "react";
+import { Button, FormControl, TextField } from "@mui/material";
 import {
   ADD_INCOME_ACTIONS,
   addIncomeInit,
   addIncomeReducer,
 } from "../../../../../../reducers/addIncomeReducer";
-import { Button, FormControl, TextField } from "@mui/material";
-import { pushDataToDb } from "../../../../../../utils/setUpdateData";
-import { ADD_EXPENSES_ACTIONS } from "../../../../../../reducers/addExpensesReducer";
+import { getDataFormDb } from "../../../../../../utils/getData";
+import { updateSingleIncomeInDb } from "../../../../../../utils/setUpdateData";
 
-function AddIncomeForm({ close }) {
-  //write code here
+function EditIncomeForm({ id, close }) {
   const [incomeState, dispatchIncomeState] = useImmerReducer(
     addIncomeReducer,
     addIncomeInit
@@ -29,13 +29,29 @@ function AddIncomeForm({ close }) {
     e.preventDefault();
     try {
       // push to db
-      await pushDataToDb("income", incomeState);
-      dispatchIncomeState({ type: ADD_EXPENSES_ACTIONS.RESET });
+      await updateSingleIncomeInDb(id, incomeState);
+      dispatchIncomeState({ type: ADD_INCOME_ACTIONS.RESET });
       close();
     } catch (error) {
-      console.error("couldn't push to income", error.message);
+      console.error("couldn't edit the income", error.message);
     }
   }
+
+  // get the expense objects value on render
+  useEffect(() => {
+    (async function () {
+      try {
+        const incomeObj = await getDataFormDb(`income/${id}`);
+
+        dispatchIncomeState({
+          type: ADD_INCOME_ACTIONS.SET_FIELDS,
+          payload: incomeObj,
+        });
+      } catch (error) {
+        console.error(error.message);
+      }
+    })();
+  }, []);
 
   return (
     <form
@@ -76,4 +92,4 @@ function AddIncomeForm({ close }) {
   );
 }
 
-export default AddIncomeForm;
+export default EditIncomeForm;
