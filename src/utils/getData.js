@@ -1,7 +1,7 @@
 import { getDatabase, ref, child, get, set } from "firebase/database";
 import { auth } from "../firebaseConfige";
 
-export async function getDataFormDb(path) {
+export async function getDataFromDb(path) {
   const uid = auth.currentUser.uid;
   const dbRef = ref(getDatabase(), `users/${uid}`);
   const snapshot = await get(child(dbRef, path));

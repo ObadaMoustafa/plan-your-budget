@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { AppContext } from "../../../../context/expensesContext";
-import { getDataFormDb } from "../../../../utils/getData";
+import { getDataFromDb } from "../../../../utils/getData";
 import { APP_ACTIONS } from "../../../../reducers/appReducer";
 import SingleExpenseCard from "./components/SingleExpenseCard";
 import { Box, Grid } from "@mui/material";
@@ -41,8 +41,15 @@ function ShowExpenses() {
       {expensesArr.length > 0 ? (
         <Grid container spacing={2} justifyContent="center">
           {expensesArr.map(([OBJ_ID, expenseObject]) => {
-            const { title, value, description, category, IBAN, refMsg } =
-              expenseObject;
+            const {
+              title,
+              value,
+              description,
+              category,
+              IBAN,
+              refMsg,
+              checked,
+            } = expenseObject;
             return (
               <Grid item key={OBJ_ID} xs={12} sm={6} md={4}>
                 <SingleExpenseCard
@@ -53,6 +60,7 @@ function ShowExpenses() {
                   description={description}
                   IBAN={IBAN}
                   refMsg={refMsg}
+                  checked={checked || false}
                 />
               </Grid>
             );

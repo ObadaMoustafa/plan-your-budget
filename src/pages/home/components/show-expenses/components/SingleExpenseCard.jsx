@@ -1,5 +1,8 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Checkbox } from "@mui/material";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ModifyIcons from "./ModifyIcons";
+import { updateSingleExpenseInDb } from "../../../../../utils/setUpdateData";
 function SingleExpenseCard({
   title,
   value,
@@ -8,8 +11,17 @@ function SingleExpenseCard({
   IBAN,
   refMsg,
   id,
+  checked,
 }) {
   //write code here
+  const payExpenseOrNot = async () => {
+    // this function is only to select the expense or deselect it.
+    try {
+      await updateSingleExpenseInDb(`${id}/checked`, !checked);
+    } catch (error) {
+      console.error("error occurred", error.message);
+    }
+  };
 
   return (
     <Box
@@ -21,6 +33,14 @@ function SingleExpenseCard({
       }}
       boxShadow={2}
     >
+      <Checkbox
+        checked={checked}
+        onChange={payExpenseOrNot}
+        icon={<CheckCircleOutlineIcon color="error" />}
+        checkedIcon={<CheckCircleIcon />}
+        color="success"
+        sx={{ "& .MuiSvgIcon-root": { fontSize: 40 } }}
+      />
       <ModifyIcons id={id} />
       <Typography variant="h3" component="p" fontWeight={600}>
         {value}

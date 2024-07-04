@@ -11,6 +11,7 @@ export const addExpensesInitial = {
   description: "",
   IBAN: "",
   refMsg: "",
+  checked: false,
 };
 
 export const addExpensesReducer = (state = addExpensesInitial, action) => {

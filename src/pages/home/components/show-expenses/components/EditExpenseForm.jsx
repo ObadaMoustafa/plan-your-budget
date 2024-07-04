@@ -7,7 +7,7 @@ import {
 import { useEffect } from "react";
 import { updateSingleExpenseInDb } from "../../../../../utils/setUpdateData";
 import { Button, FormControl, TextField } from "@mui/material";
-import { getDataFormDb } from "../../../../../utils/getData";
+import { getDataFromDb } from "../../../../../utils/getData";
 
 function EditExpenseForm({ id, close }) {
   const [singleExpenseState, dispatchSubmit] = useImmerReducer(
@@ -19,7 +19,7 @@ function EditExpenseForm({ id, close }) {
   useEffect(() => {
     (async function () {
       try {
-        const expenseObj = await getDataFormDb(`expenses/${id}`);
+        const expenseObj = await getDataFromDb(`expenses/${id}`);
 
         dispatchSubmit({
           type: ADD_EXPENSES_ACTIONS.SET_FIELDS,
@@ -30,6 +30,10 @@ function EditExpenseForm({ id, close }) {
       }
     })();
   }, []);
+
+  useEffect(() => {
+    console.log(singleExpenseState);
+  }, [singleExpenseState]);
 
   function handleChangeField(e) {
     const key = e.target.name;

@@ -6,7 +6,7 @@ import {
   addIncomeInit,
   addIncomeReducer,
 } from "../../../../../../reducers/addIncomeReducer";
-import { getDataFormDb } from "../../../../../../utils/getData";
+import { getDataFromDb } from "../../../../../../utils/getData";
 import { updateSingleIncomeInDb } from "../../../../../../utils/setUpdateData";
 
 function EditIncomeForm({ id, close }) {
@@ -41,7 +41,7 @@ function EditIncomeForm({ id, close }) {
   useEffect(() => {
     (async function () {
       try {
-        const incomeObj = await getDataFormDb(`income/${id}`);
+        const incomeObj = await getDataFromDb(`income/${id}`);
 
         dispatchIncomeState({
           type: ADD_INCOME_ACTIONS.SET_FIELDS,
