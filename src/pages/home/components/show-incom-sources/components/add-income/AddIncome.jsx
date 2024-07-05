@@ -3,23 +3,21 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import BackdropForm from "../../../../../../components/BackdropForm";
 import AddIncomeForm from "./AddIncomForm";
+import AddButton from "../../../show-expenses/components/add-expenses/AddButton";
 
 function AddIncome() {
   const [openBackDrop, setOpenBackDrop] = useState(false);
-  const open = () => setOpenBackDrop(true);
   const closeBackDrop = () => setOpenBackDrop(false);
 
   return (
     <>
-      <Button
-        startIcon={<TrendingUpIcon />}
+      <AddButton
+        onclick={setOpenBackDrop}
         color="success"
-        variant="contained"
-        size="large"
-        onClick={open}
+        btnIcon={<TrendingUpIcon />}
       >
-        add income
-      </Button>
+        Add income
+      </AddButton>
       {openBackDrop && (
         <BackdropForm setOpen={setOpenBackDrop}>
           <AddIncomeForm close={closeBackDrop} />

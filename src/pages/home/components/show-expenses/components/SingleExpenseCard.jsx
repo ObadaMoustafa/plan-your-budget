@@ -26,11 +26,13 @@ function SingleExpenseCard({
   return (
     <Box
       sx={{
-        border: "1px solid black",
+        border: "5px solid",
+        borderColor: checked ? "#6db30c" : "#ff0000",
         borderRadius: 5,
         p: 2,
         position: "relative",
       }}
+      bgcolor="white"
       boxShadow={2}
     >
       <Checkbox

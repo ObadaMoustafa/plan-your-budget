@@ -1,6 +1,5 @@
 import { Button, Tooltip } from "@mui/material";
-import AddCardIcon from "@mui/icons-material/AddCard";
-function AddButton({ onclick }) {
+function AddButton({ onclick, color, children, btnIcon }) {
   //write code here
   function toggleIsOpen() {
     onclick((prev) => !prev);
@@ -10,11 +9,13 @@ function AddButton({ onclick }) {
       <Tooltip title="Add expenses" placement="top">
         <Button
           variant="contained"
+          size="large"
+          color={color}
           sx={{ width: 200 }}
           onClick={toggleIsOpen}
-          startIcon={<AddCardIcon />}
+          startIcon={btnIcon}
         >
-          add expense
+          {children}
         </Button>
       </Tooltip>
     </>

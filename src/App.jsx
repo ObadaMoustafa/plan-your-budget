@@ -1,6 +1,6 @@
-import { Typography, Container, Button, Box } from "@mui/material";
+import { Typography, Container, Button, Box, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./firebaseConfige";
 
@@ -9,7 +9,6 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const uid = user.uid;
         setIsUser(true);
       } else {
         setIsUser(false);
@@ -23,27 +22,33 @@ function App() {
     });
   }
   return (
-    <Container>
-      <Link to="/">
-        <Typography variant="h3" component="h1">
-          plan your budget
-        </Typography>
-      </Link>
-      {isUser ? (
-        <Box>
-          <Button variant="contained" onClick={handleSignOut}>
-            sign out
-          </Button>
-        </Box>
-      ) : (
-        <Link to="/login">
-          <Typography variant="h3" component="h2">
-            Login
-          </Typography>
-        </Link>
-      )}
-      <Outlet context={isUser} />
-    </Container>
+    <Box bgcolor="#093966" minHeight="100vh">
+      <Container>
+        <Grid container justifyContent="space-between" alignItems="center">
+          <Grid item>
+            <Typography
+              variant="h3"
+              component="h1"
+              color="warning"
+              m={3}
+              ml={0}
+            >
+              plan your budget
+            </Typography>
+          </Grid>
+          {isUser && (
+            <Grid item>
+              <Box>
+                <Button variant="contained" onClick={handleSignOut}>
+                  sign out
+                </Button>
+              </Box>
+            </Grid>
+          )}
+        </Grid>
+        <Outlet context={isUser} />
+      </Container>
+    </Box>
   );
 }
 
