@@ -1,4 +1,6 @@
 import { Typography, Container, Button, Box, Grid } from "@mui/material";
+import Divider from "@mui/material/Divider";
+
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -22,17 +24,11 @@ function App() {
     });
   }
   return (
-    <Box bgcolor="#093966" minHeight="100vh">
+    <Box bgcolor="#093966" minHeight="100vh" pb={5}>
       <Container>
         <Grid container justifyContent="space-between" alignItems="center">
           <Grid item>
-            <Typography
-              variant="h3"
-              component="h1"
-              color="warning"
-              m={3}
-              ml={0}
-            >
+            <Typography variant="h3" component="h1" color="white" m={3} ml={0}>
               plan your budget
             </Typography>
           </Grid>
@@ -46,6 +42,7 @@ function App() {
             </Grid>
           )}
         </Grid>
+        <Divider sx={{ borderColor: "#858383" }} />
         <Outlet context={isUser} />
       </Container>
     </Box>

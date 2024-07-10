@@ -36,7 +36,7 @@ function ShowExpenses() {
   }, []);
 
   return (
-    <Box my={5}>
+    <Box my={3}>
       <AddExpenses />
       {expensesArr.length > 0 ? (
         <Grid container spacing={2} justifyContent="center">

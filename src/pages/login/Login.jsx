@@ -34,7 +34,7 @@ function Login() {
   function handleEmailChange(e) {
     setEmail(e.target.value);
   }
-  function handleEmailPassword(e) {
+  function handlePasswordChange(e) {
     setPassword(e.target.value);
   }
 
@@ -57,16 +57,13 @@ function Login() {
     );
   }
 
-  const fields = [
-    {
-      label: "Email",
-      placeholder: "ex. example@email.com",
-      fullWidth: true,
-      value: email,
-      onChange: handleEmailChange,
-    },
-    ,
-  ];
+  const emailFieldProps = {
+    label: "Email",
+    placeholder: "ex. example@email.com",
+    fullWidth: true,
+    value: email,
+    onChange: handleEmailChange,
+  };
 
   return (
     <>
@@ -74,16 +71,14 @@ function Login() {
         <Navigate to="/" />
       ) : (
         <>
-          <Card sx={{ mx: "auto" }}>
+          <Card sx={{ mx: "auto", p: 3 }}>
             <CardHeader title="login Form" color="primary" />
             <form onSubmit={handleLogin}>
               <Grid container spacing={5}>
-                {fields.map((props) => (
-                  <Grid key={props.label} item sm={12} md={6}>
-                    <TextField {...props} />
-                  </Grid>
-                ))}
-                <Grid item sm={12} md={6}>
+                <Grid item xs={12} md={6}>
+                  <TextField {...emailFieldProps} />
+                </Grid>
+                <Grid item xs={12} md={6}>
                   <FormControl fullWidth variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-password">
                       Password
@@ -92,7 +87,7 @@ function Login() {
                       fullWidth
                       id="outlined-adornment-password"
                       type={showPassword ? "text" : "password"}
-                      onChange={handleEmailPassword}
+                      onChange={handlePasswordChange}
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton
@@ -109,14 +104,22 @@ function Login() {
                   </FormControl>
                 </Grid>
               </Grid>
-              <CardActions>
-                <Button variant="contained" type="submit">
-                  Login
-                </Button>
-                <Button variant="contained" onClick={handleSignUp}>
-                  Sign up
-                </Button>
-              </CardActions>
+              <Button
+                variant="contained"
+                size="large"
+                type="submit"
+                sx={{ m: 2 }}
+              >
+                Login
+              </Button>
+              <Button
+                variant="contained"
+                size="large"
+                onClick={handleSignUp}
+                sx={{ m: 2 }}
+              >
+                Sign up
+              </Button>
             </form>
           </Card>
           {error && <ErrorMsg msg={error} />}

@@ -32,7 +32,7 @@ function ShowIncomeSources() {
   }, []);
 
   return (
-    <Box my={1}>
+    <Box my={3}>
       <AddIncome />
       {incomeArr.length > 0 ? (
         <>

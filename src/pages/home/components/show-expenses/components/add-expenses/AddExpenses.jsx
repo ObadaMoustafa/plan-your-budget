@@ -11,10 +11,10 @@ function AddExpenses() {
   const closeBackDrop = () => setOpenBackDrop(false);
 
   return (
-    <Box my={2}>
+    <Box my={4}>
       <AddButton
         onclick={setOpenBackDrop}
-        color="warning"
+        color="error"
         btnIcon={<AddCardIcon />}
       >
         add expenses
