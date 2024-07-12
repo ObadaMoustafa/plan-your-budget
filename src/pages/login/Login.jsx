@@ -1,7 +1,6 @@
 import {
   Button,
   Card,
-  CardActions,
   CardHeader,
   FormControl,
   Grid,
@@ -44,17 +43,32 @@ function Login() {
 
   function handleSignUp() {
     setError(null);
-    createEmail(auth, email, password).catch((error) =>
-      setError(error.message)
-    );
+    createEmail(auth, email, password).catch((error) => {
+      const errorMsg = error.message;
+      if (errorMsg.includes("already-in-use"))
+        setError("This email is already in use; you may want to Login");
+      else if (errorMsg.includes("weak-password"))
+        setError("Weak password: It should be at least 6 characters");
+      else if (errorMsg.includes("invalid-email"))
+        setError("Invalid email: use a correct valid form. ex, name@email.com");
+      else setError(errorMsg);
+    });
   }
 
   function handleLogin(e) {
     e.preventDefault();
     setError(null);
-    loginToAccount(auth, email, password).catch((error) =>
-      setError(error.message)
-    );
+    loginToAccount(auth, email, password).catch((error) => {
+      const errorMsg = error.message;
+      if (errorMsg.includes("user-not-found"))
+        setError(
+          "This email is not in use. If this is your first time, please click sign up"
+        );
+      else if (errorMsg.includes("wrong-password")) setError("Wrong password");
+      else if (errorMsg.includes("invalid-email"))
+        setError("Invalid email: use a correct valid form. ex, name@email.com");
+      else setError(errorMsg);
+    });
   }
 
   const emailFieldProps = {

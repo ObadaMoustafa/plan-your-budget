@@ -26,10 +26,15 @@ function App() {
   return (
     <Box bgcolor="#093966" minHeight="100vh" pb={5}>
       <Container>
-        <Grid container justifyContent="space-between" alignItems="center">
+        <Grid
+          container
+          justifyContent="space-between"
+          alignItems="center"
+          pb={3}
+        >
           <Grid item>
             <Typography variant="h3" component="h1" color="white" m={3} ml={0}>
-              plan your budget
+              Plan your budget
             </Typography>
           </Grid>
           {isUser && (
